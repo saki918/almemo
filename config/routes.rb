@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   namespace :admin do
     get 'searches/index'
@@ -15,9 +17,7 @@ Rails.application.routes.draw do
     get 'guests/edit'
     get 'guests/index'
   end
-  namespace :guest do
-    get 'homes/top'
-  end
+  root 'guest/homes#top'
   namespace :guest do
     get 'searches/index'
   end
