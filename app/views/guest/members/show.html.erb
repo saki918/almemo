@@ -1,2 +1,12 @@
 <h1>Guest::Members#show</h1>
 <p>Find me in app/views/guest/members/show.html.erb</p>
+
+<%= @member.name + "が参加しているイベント一覧" %>
+
+<% @events.each do |event| %>
+  <%= event.genre_id %>
+  <%= link_to event.title, @event %>
+  <%= event.comment %>
+  <%= event.start_time %>
+  <%= event.finish_time %>
+<% end %>
