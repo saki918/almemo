@@ -16,10 +16,15 @@ protected
   end
   def after_sign_out_path_for(resource)
     case resource
-    when Guest
+    when :guest
       root_path
-    when Admin
+    when :admin
       new_admin_session_path
     end
   end
+
+#   def configure_permitted_parameters
+#     devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
+#    # sign_upの際にnameのデータ操作を許。追加したカラム。
+#  end
 end
