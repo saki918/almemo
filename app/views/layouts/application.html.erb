@@ -11,54 +11,11 @@
 
   <body>
     <% if current_guest %>
-    <header class="navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
-
-        <nav class="nav navbar-nav navbar-left">
-          <span>Almemo</span>
-        </nav>
-        <nav>
-          <ul class="nav navbar-nav navbar-right">
-            <!--if文でサインインとアウト時の表示を変更-->
-            <% if guest_signed_in? %>
-            <li><%= link_to 'My Calender', events_path %></li>
-            <li><%= link_to 'My Page', guests_path %></li>
-            <li><%= link_to 'Log Out', destroy_guest_session_path, method: :delete %></li>
-            <% else %>
-            <li><%= link_to 'Home', root_path %></li>
-            <li><%= link_to 'sign up', new_guest_registration_path %></li>
-            <li><%= link_to 'login', new_guest_session_path %></li>
-            <% end %>
-          </ul>
-        </nav>
-
-      </div>
-    </header>
+      <%= render "layouts/guest" %>
     <% else current_admin %>
-    <header class="navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
-
-        <nav class="nav navbar-nav navbar-left">
-          <span>Almemo</span>
-        </nav>
-        <nav>
-          <ul class="nav navbar-nav navbar-right">
-            <!--if文でサインインとアウト時の表示を変更-->
-            <% if admin_signed_in? %>
-            <li><%= link_to 'Log Out', destroy_admin_session_path, method: :delete %></li>
-            <% else %>
-            <li><%= link_to 'Home', root_path %></li>
-            <li><%= link_to 'sign up', new_guest_registration_path %></li>
-            <li><%= link_to 'login', new_guest_session_path %></li>
-            <% end %>
-          </ul>
-        </nav>
-
-      </div>
-    </header>
+      <%= render "layouts/admin" %>
     <% end %>
-
-    <div class = "container">
+    <div class = "container-fluid">
       <div class = "row">
       <%= yield %>
       </div>
