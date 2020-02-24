@@ -1,0 +1,30 @@
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+
+    <nav class="nav navbar-nav navbar-left">
+      <h1>Almemo</h1>
+    </nav>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <!--if文でサインインとアウト時の表示を変更-->
+        <% if guest_signed_in? %>
+        <li>
+        <% if current_guest.name == nil %>
+          <%= "ようこそ" + current_guest.email + "様" %>
+        <% else %>
+          <%= "ようこそ" + current_guest.name + "様" %>
+        <% end %>
+        </li>
+        <li><%= link_to 'My Calender', events_path %></li>
+        <li><%= link_to 'My Page', guest_path(current_guest) %></li>
+        <li><%= link_to 'Log Out', destroy_guest_session_path, method: :delete %></li>
+        <% else %>
+        <li><%= link_to 'Home', root_path %></li>
+        <li><%= link_to 'sign up', new_guest_registration_path %></li>
+        <li><%= link_to 'login', new_guest_session_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+
+  </div>
+</nav>
