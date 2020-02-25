@@ -1,0 +1,8 @@
+<% events.each do |event| %>
+  <%= event.genre.name %>
+  <%= link_to event.title, @event %>
+  <%= event.event_members.member.name %>
+  <%= event.comment %>
+  <%= event.start_time %>
+  <%= event.finish_time %>
+<% end %>
