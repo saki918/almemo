@@ -8,10 +8,10 @@ Rails.application.routes.draw do
     get 'searches/index'
   end
   namespace :admin do
-    resource :members, except:[:new,:create,:edit]
+    resources :members, except:[:new,:create,:edit,:index]
   end
   namespace :admin do
-    resource :events, except:[:new,:create]
+    resources :events, except:[:new,:create,:index]
   end
   namespace :admin do
     resources :guests, except:[:new,:create]
@@ -22,13 +22,13 @@ Rails.application.routes.draw do
     get 'searches/index'
   end
   scope module: :guest do
-    resource :members, except:[:new,:edit]
+    resources :members, except:[:new,:edit,:index]
   end
   scope module: :guest do
     resources :events
   end
   scope module: :guest do
-    resource :guests, except:[:new,:create,:destroy]
+    resources :guests, except:[:new,:create,:destroy,:index]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
