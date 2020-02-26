@@ -1,5 +1,9 @@
 <% events.each do |event| %>
-  <%= event.genre.name %>
+  <%
+=begin%>
+ <%= event.genre.name %> 
+<%
+=end%>
   <%= link_to event.title, @event %>
   <%= event.event_members.member.name %>
   <%= event.comment %>

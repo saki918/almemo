@@ -1,6 +1,11 @@
 <div class = "col-md-offset-1 col-md-10 col-md-offset-1">
   <%= link_to "イベント新規作成", new_event_path %>
-  <%= month_calendar do |date| %>
+  <%= month_calendar events: @events do |date, event| %>
     <%= date.to_formatted_s(:only_date) %>
+    <% event.each do |event| %>
+    <div>
+      <%= link_to event.title, event %>
+    </div>
+  <% end %>
   <% end %>
 </div>
