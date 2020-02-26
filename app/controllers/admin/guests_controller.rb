@@ -1,5 +1,5 @@
 class Admin::GuestsController < ApplicationController
-  before_action :current_admin
+  before_action :authenticate_admin!
 
   def index
   end
@@ -15,7 +15,7 @@ class Admin::GuestsController < ApplicationController
 
   def update
     @guest = Guest.find(params[:id])
-    if @guest.save
+    if @guest.update
       redirect_to @guest
     else
       render :edit

@@ -1,0 +1,14 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th>名前</th>
+		</tr>
+	</thead>
+  <% members.each do |member| %>
+    <tr class = "info">
+      <% if member.name != nil %>
+      <td><%= member.name %></td>
+      <td><%= link_to "詳細", (member), class: "btn btn-primary" %>
+      <%= link_to "削除", (member), method: :delete, class: "btn btn-danger","data-confirm" => "削除しますか？" %></td>
+      <% end %>
+  <% end %>
