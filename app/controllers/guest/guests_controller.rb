@@ -8,11 +8,12 @@ class Guest::GuestsController < ApplicationController
     @members = current_guest.members
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if current_guest.update(guest_params)
-      redirect_to current_guest
+      redirect_to current_guest, notice: 'プロフィールを更新しました！'
     else
       render current_guest
     end
