@@ -16,3 +16,11 @@
  */
  @import "bootstrap-sprockets";  /*ここを追加*/
  @import "bootstrap";
+ li {
+   font-size: 25px;
+   padding-top: 10px;
+ }
+ li.guest_name {
+   color: red;
+   padding-top: 20px;
+ }

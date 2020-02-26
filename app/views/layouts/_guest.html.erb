@@ -6,10 +6,20 @@
     </nav>
     <nav>
       <ul class="nav navbar-nav navbar-right">
+        <%
+=begin%>
+ <%= search_form_for @search do |f| %>
+          <%= f.label :eventmember.name_or_title_or_comment, "検索する場合はこちら" %>
+          <%= f.search_field
+          :eventmember.name_or_title_or_comment %>
+          <%= f.submit "検索" %>
+        <% end %> 
+<%
+=end%>
         <!--if文でサインインとアウト時の表示を変更-->
         <% if guest_signed_in? %>
-        <li>
-        <% if current_guest.name == nil %>
+        <li class = "guest_name">
+        <% if current_guest.name.empty? %>
           <%= "ようこそ" + current_guest.email + "様" %>
         <% else %>
           <%= "ようこそ" + current_guest.name + "様" %>
