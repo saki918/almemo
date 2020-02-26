@@ -12,7 +12,6 @@ class Admin::EventsController < ApplicationController
     @event = Event.find(params[:id])
     if @event.update(event_params)
       redirect_to @event
-
     else
       render 'edit'
     end
@@ -21,7 +20,7 @@ class Admin::EventsController < ApplicationController
   def destroy
     event = Event.find(params[:id])
     event.destroy
-    redirect_to admin_events_path
+    redirect_to request.referer
   end
 
   private
