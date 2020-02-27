@@ -3,7 +3,10 @@
 Rails.application.routes.draw do
   devise_for :admins
   devise_for :guests
-
+  
+  namespace :admin do
+    resources :genres, except:[:update,:edit,:show]
+  end
   namespace :admin do
     get 'searches/index'
   end
