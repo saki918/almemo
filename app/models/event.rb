@@ -1,6 +1,5 @@
 class Event < ApplicationRecord
   belongs_to :guest
-  belongs_to :genre
   has_many :event_members
   has_many :images
   has_many :members
