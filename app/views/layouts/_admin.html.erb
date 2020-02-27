@@ -9,7 +9,7 @@
         <!--if文でサインインとアウト時の表示を変更-->
         <% if admin_signed_in? %>
         <li><%= link_to 'My Calender', events_path %></li>
-        <li><%= link_to 'My Page', guests_path %></li>
+        <li><%= link_to 'ジャンル一覧', new_admin_genre_path %></li>
         <li><%= link_to 'Log Out', destroy_guest_session_path, method: :delete %></li>
         <% else %>
         <li><%= link_to 'Home', root_path %></li>
