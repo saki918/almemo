@@ -1,0 +1,9 @@
+<h1>Admin::Genres#index</h1>
+<p>Find me in app/views/admin/genres/index.html.erb</p>
+<p><%= notice %></p>
+<%= link_to "ジャンル新規作成", new_admin_genre_path, class:"btn btn-success" %><br>
+<% @genres.each do |genre| %>
+  <%= genre.name %>
+  <%= image_tag genre.icon_id.to_s %>
+  <%= link_to "削除", admin_genre_path(genre), method: :delete, class: "btn btn-danger","data-confirm" => "削除しますか？" %>
+<% end %>

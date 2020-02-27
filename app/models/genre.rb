@@ -1,3 +1,3 @@
 class Genre < ApplicationRecord
-  has_many :genres
+  mount_uploader :icon_id , ImageUploader
 end
