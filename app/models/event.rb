@@ -3,7 +3,6 @@ class Event < ApplicationRecord
   has_many :event_members
   has_many :images
   has_many :members
-  attachment :image, destroy: false
   # accepts_nested_attributes_forを使うことで簡単に1対多のモデルを一度に更新するフォームを作成することできます。
   accepts_nested_attributes_for :event_members
   accepts_nested_attributes_for :images
