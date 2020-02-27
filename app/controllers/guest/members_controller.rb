@@ -3,32 +3,32 @@ class Guest::MembersController < ApplicationController
   
   def show
     @member = Member.find(params[:id])
-    @events = @member.events
+    # @events = @member.events
   end
 
   def create
-    @new_member = current_guest.member.new(member_params)
+    @new_member = current_guest.members.new(member_params)
     # @new_member.guest_id == current_guest.id
     if @new_member.save
-      redirect_to members_show_path
+      redirect_to @new_member, notice: 'メンバーを作成しました！'
     else
-      render guests_show_path
+      render guest_path(current_guest)
     end
   end
 
   def update
     @member = Member.find(params[:id])
     if @member.update(member_params)
-      redirect_to request.referer
+      redirect_to request.referer, notice: 'メンバーを編集しました！'
     else
-      render guests_show_path
+      render guest_path(current_guest)
     end
   end
 
   def destroy
     member = Member.find(params[:id])
     member.destroy
-    redirect_to guests_show_path
+    redirect_to guest_path(current_guest), notice: 'メンバーを削除しました！'
   end
 
 private
