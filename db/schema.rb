@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_21_083658) do
+ActiveRecord::Schema.define(version: 2020_02_26_092449) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 2020_02_21_083658) do
 
   create_table "events", force: :cascade do |t|
     t.integer "guest_id"
-    t.integer "eventmember_id"
     t.integer "genre_id"
     t.string "title", null: false
     t.text "comment"
@@ -44,9 +43,10 @@ ActiveRecord::Schema.define(version: 2020_02_21_083658) do
   end
 
   create_table "genres", force: :cascade do |t|
-    t.integer "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "icon_id"
   end
 
   create_table "guests", force: :cascade do |t|
