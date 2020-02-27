@@ -4,12 +4,14 @@ class Guest::EventsController < ApplicationController
   before_action :authenticate_guest!
   def show
     @event = Event.find(params[:id])
+    @images = @event.images
+    # binding.pry
   end
 
   def edit
     @event = Event.find(params[:id])
-    @new_event.event_members.build
-    @new_event.images.build
+    @event.event_members.build
+    @event.images.build
   end
 
   def new
@@ -23,16 +25,29 @@ class Guest::EventsController < ApplicationController
   end
 
   def create
-    # binding.pry
     @new_event = current_guest.events.new(event_params)
     # binding.pry
     if @new_event.save
-      # event[eventmember_id].each do |member_id|
-      #    event_member = Event_member.new(new_event.id, member_id)
-      #    event_member.save
+
+      # {"utf8"=>"✓", "authenticity_token"=>"cdy74XCP1iJiRkRU8gGUIRs1mbHJVuAG7bve63274Gbotwx3D30Rewh7MFVnR8LzwZUJRS6SaOUB8Vjy3UQjhA==", "event"=>{"genre_id"=>"date", "event_members_attributes"=>{"0"=>{"member_id"=>["3", "5"]}}, "title"=>"title", "start_time(1i)"=>"2020", "start_time(2i)"=>"2", "start_time(3i)"=>"27", "start_time(4i)"=>"10", "start_time(5i)"=>"39", "finish_time(1i)"=>"2020", "finish_time(2i)"=>"2", "finish_time(3i)"=>"27", "finish_time(4i)"=>"10", "finish_time(5i)"=>"39", "comment"=>"commet", "images_attributes"=>{"0"=>{"refile_id"=>[#<ActionDispatch::Http::UploadedFile:0x00007f9af4580818 @tempfile=#<Tempfile:/tmp/RackMultipart20200227-7346-83ibvy.png>, @original_filename="shopping.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"event[images_attributes][0][refile_id][]\"; filename=\"shopping.png\"\r\nContent-Type: image/png\r\n">]}}}, "commit"=>"イベント作成"}
+
+      params[:event][:event_members_attributes]['0']['member_id'].each do |member_id|
+        @new_event.event_members.create(member_id: member_id.to_i)
+      end
+
+      params[:event][:images_attributes]['0']['refile_id'].each do |refile_id|
+        @new_event.images.create(refile_id: refile_id)
+      end
+
+      # params[:event_members]['member_id'].each do |c|
+      # @member = @new_event.members.save(member_id: c)
+      # end
+      # params[:images]['refile_id'].each do |a|
+      # @image = @new_event.images.save(refile_id: a)
       # end
       redirect_to @new_event, notice: 'イベントの作成に成功しました！'
     else
+      # binding.pry
       render 'new'
     end
   end
@@ -55,6 +70,6 @@ class Guest::EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:genre_id, :title, :comment, :start_time, :finish_time, event_members_attributes: [:id [], :member_id[]], images_attributes: [:id [], :refile_id[]])
+    params.require(:event).permit(:genre_id, :title, :comment, :start_time, :finish_time)
   end
 end
