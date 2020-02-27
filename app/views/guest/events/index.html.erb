@@ -1,4 +1,5 @@
 <div class = "col-md-offset-1 col-md-10 col-md-offset-1">
+<p><%= notice %></p>
   <%= link_to "イベント新規作成", new_event_path %>
   <%= month_calendar events: @events do |date, event| %>
     <%= date.to_formatted_s(:only_date) %>
