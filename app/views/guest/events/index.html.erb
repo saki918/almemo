@@ -2,10 +2,17 @@
 <p><%= notice %></p>
   <%= link_to "イベント新規作成", new_event_path %>
   <%= month_calendar events: @events do |date, event| %>
-    <%= date.to_formatted_s(:only_date) %>
+    <%= date.to_formatted_s(:default) %>
     <% event.each do |event| %>
     <div>
-      <%= link_to event.title, event %>
+      <%= link_to event_path(event) do %>
+    <%- if Genre.find_by(id: event.genre_id).present? %>
+      <%= image_tag event.genre.icon_id.to_s, size:6*6 %>
+    <% else %>
+      <%= "なし"%>
+    <% end %>
+      <%= event.title %>
+      <% end %>
     </div>
   <% end %>
   <% end %>
