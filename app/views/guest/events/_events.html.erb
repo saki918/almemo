@@ -4,8 +4,10 @@
  <%= event.genre.name %> 
 <%
 =end%>
-  <%= link_to event.title, @event %>
-  <%= event.event_members.member.name %>
+  <%= link_to event.title, event %>
+  <% event.event_members.each do |member| %>
+  <%= member.member.name %>
+  <% end %>
   <%= event.comment %>
   <%= event.start_time %>
   <%= event.finish_time %>
