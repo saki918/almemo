@@ -15,7 +15,7 @@ class Guest::GuestsController < ApplicationController
     if current_guest.update(guest_params)
       redirect_to current_guest, notice: 'プロフィールを更新しました！'
     else
-      render current_guest
+      render 'edit'
     end
   end
 
