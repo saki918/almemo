@@ -8,8 +8,8 @@
   <% end %><br>
   <%= f.fields_for :event_members do |a| %>
     <%= a.label :"メンバー" %>
-    <%= a.collection_select :member_id,current_guest.members, :id, :name, {include_hidden: false},{multiple: true} %>
-  <% end %>
+    <%= a.collection_select :member_id,current_guest.members, :id, :name, {include_hidden: false},input_html: {multiple: "multiple"}, id: 'select',multiple: "multiple" %>
+  <% end %><br>
 
   <%= f.label :"タイトル" %>
   <%= f.text_field :title %><br>
@@ -25,3 +25,7 @@
   <% end %>
   <%= f.submit "イベント作成", class: "btn btn-primary" %>
 <% end %>
+
+
+
+
