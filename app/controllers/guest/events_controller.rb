@@ -11,9 +11,11 @@ class Guest::EventsController < ApplicationController
   end
 
   def edit
+    @genres = Genre.all
     @event = Event.find(params[:id])
-    @event.event_members.build
-    @event.images.build
+    @images = @event.images
+    # @event.event_members.build
+    # @event.images.build
   end
 
   def new
@@ -51,8 +53,8 @@ class Guest::EventsController < ApplicationController
 
       @genres = Genre.all
       # @new_event = current_guest.events.new
-      # @new_event.event_members.build
-      # @new_event.images.build
+      @new_event.event_members.build
+      @new_event.images.build
       # @new_event.valid?
       render 'new'
     end
@@ -62,6 +64,18 @@ class Guest::EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     if @event.update(event_params)
+      unless params[:event][:event_members_attributes].nil?
+        # if params[:event][:event_members_attributes].blank?
+
+        params[:event][:event_members_attributes]['0']['member_id'].each do |member_id|
+          @event.event_members.create(member_id: member_id.to_i)
+        end
+      end
+      unless params[:event][:images_attributes].nil?
+        params[:event][:images_attributes]['0']['refile_id'].each do |refile_id|
+          @event.images.create(refile_id: refile_id)
+        end
+      end
       redirect_to @event, notice: 'イベントを編集しました！'
     else
       render 'edit'
