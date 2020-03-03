@@ -6,7 +6,10 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
   </head>
 
   <body>
@@ -17,7 +20,9 @@
     <% end %>
     <div class = "container-fluid">
       <div class = "row">
-      <%= yield %>
+        <div class = "col-md-offset-1 col-md-10 col-md-offset-1">
+          <%= yield %>
+        </div>
       </div>
     </div>
   </body>
