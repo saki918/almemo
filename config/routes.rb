@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :guests
   
   namespace :admin do
-    resources :genres, except:[:update,:edit,:show]
+    resources :genres, except:[:show]
   end
   namespace :admin do
     get 'searches/index'
@@ -23,6 +23,9 @@ Rails.application.routes.draw do
 
   scope module: :guest do
     get 'searches/index'
+  end
+  scope module: :guest do
+    delete :images, to: 'images#destroy_all'
   end
   scope module: :guest do
     resources :members, except:[:new,:edit,:index]
