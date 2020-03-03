@@ -1,11 +1,13 @@
 <h1>Guest::Members#show</h1>
 <p>Find me in app/views/guest/members/show.html.erb</p>
+<p><%= notice %></p>
+<%= @member.name + "が参加しているイベント一覧" %><br>
+<%= form_for(@member) do |f| %>
+    <%= f.label :名前の更新欄 %>
+    <%= f.text_field :name %>
+    <%= f.submit %>
+  <% end %>
 
-<%= @member.name + "が参加しているイベント一覧" %>
+<%= render "guest/events/events", events: @events %>
 
-<%
-=begin%>
- <%= render "guest/events/events", events: @events %> 
-<%
-=end%>
 
