@@ -1,18 +1,24 @@
+# frozen_string_literal: true
+
 class Guest::MembersController < ApplicationController
   before_action :current_guest
-  
+
   def show
     @member = Member.find(params[:id])
-    # @events = @member.events
+    @events = @member.events
   end
 
   def create
-    @new_member = current_guest.members.new(member_params)
-    # @new_member.guest_id == current_guest.id
+    @new_member = Member.new(member_params)
+    @new_member.guest_id = current_guest.id
+    # binding.pry
     if @new_member.save
+      # @new_member.guest_id == current_guest.id
       redirect_to @new_member, notice: 'メンバーを作成しました！'
     else
-      render guest_path(current_guest)
+      # binding.pry
+      # render 'guest/guests/show'
+      redirect_to guest_path(current_guest.id), flash: { error: @new_member.errors.full_messages }
     end
   end
 
@@ -21,7 +27,7 @@ class Guest::MembersController < ApplicationController
     if @member.update(member_params)
       redirect_to request.referer, notice: 'メンバーを編集しました！'
     else
-      render guest_path(current_guest)
+      render 'guests/show'
     end
   end
 
@@ -31,7 +37,8 @@ class Guest::MembersController < ApplicationController
     redirect_to guest_path(current_guest), notice: 'メンバーを削除しました！'
   end
 
-private
+  private
+
   def member_params
     params.require(:member).permit(:name)
   end
