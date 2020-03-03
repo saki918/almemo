@@ -4,7 +4,7 @@ class Guest::GuestsController < ApplicationController
   before_action :authenticate_guest!
 
   def show
-    @new_member = current_guest.members.new
+    @new_member = Member.new
     @members = current_guest.members
   end
 
