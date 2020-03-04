@@ -25,7 +25,7 @@ class Guest::MembersController < ApplicationController
   def update
     @member = Member.find(params[:id])
     if @member.update(member_params)
-      redirect_to request.referer, notice: 'メンバーを編集しました！'
+      redirect_to request.referer, notice: 'メンバーの名前を編集しました！'
     else
       render 'guests/show'
     end

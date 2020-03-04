@@ -1,13 +1,36 @@
 <h1>Guest::Members#show</h1>
 <p>Find me in app/views/guest/members/show.html.erb</p>
 <p><%= notice %></p>
-<%= @member.name + "が参加しているイベント一覧" %><br>
+<h3><%= @member.name + "が参加しているイベント一覧" %></h3><br>
+メンバー名前を更新する場合はこちら⬇︎
 <%= form_for(@member) do |f| %>
     <%= f.label :名前の更新欄 %>
     <%= f.text_field :name %>
     <%= f.submit %>
   <% end %>
+<table class="table">
+  <thead>
+  <tr>
+    <th></th>
+    <th>タイトル</th>
+    <th>メンバー</th>
+    <th>コメント</th>
+    <th>開始時間</th>
+    <th>終了時間</th>
+  </tr>
+  </thead>
+  <% @events.each do |event| %>
+    <tr>
+      <td><%= image_tag event.genre.icon_id.to_s, size:5*5 %></td>
+      <td><%= link_to event.title, event %></td>
+      <td><%= @member.name %></td>
+      <td><%= event.comment %></td>
+      <td><%= event.start_time.to_s(:published_on) %></td>
+      <td><%= event.finish_time.to_s(:published_on) %></td>
+      <td><%= link_to "編集", edit_event_path(event), class: "btn btn-success" %></td>
+      <td><%= link_to "削除", event_path(event), method: :delete, class: "btn btn-danger","data-confirm" => "削除しますか？" %></td>
+    <% end %>
+</table>
 
-<%= render "guest/events/events", events: @events %>
 
 
