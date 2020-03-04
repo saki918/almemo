@@ -14,16 +14,19 @@
  *= require simple_calendar
  *= require_tree .
  *= require_self
- *= require selectize
- *= require selectize.default
  */
  @import "bootstrap-sprockets";  /*ここを追加*/
  @import "bootstrap";
- li {
+ .nav>li>a {
    font-size: 25px;
-   padding-top: 10px;
+   padding-top: 38px;
+   color: brown;
  }
  li.guest_name {
-   color: red;
-   padding-top: 20px;
+   font-size: 25px;
+   color: brown;
+   padding-top: 30px;
  }
+ .event_search {
+   padding-top: 32px;
+  }
