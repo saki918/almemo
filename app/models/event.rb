@@ -13,5 +13,7 @@ class Event < ApplicationRecord
   validates :title, presence: true
   validates :start_time, presence: true
 
+  default_scope -> { order(start_time: :asc) }
+
   # enum genre_id: [:meal, :date, :work, :sport, :shopping, :drive, :drinking_party, :movie, :celebration]
 end
