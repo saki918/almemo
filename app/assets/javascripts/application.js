@@ -15,8 +15,7 @@
 //= require jquery
 // = require jquery_ujs
 //= require multiple-select.min
-//= require selectize
 //= require bootstrap-sprockets
-//= require turbolinks
+
 //= require_tree .
 
