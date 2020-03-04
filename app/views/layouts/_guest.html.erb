@@ -1,18 +1,20 @@
-<nav class="navbar navbar-inverse navbar-static-top">
-  <div class="container">
+<nav class="navbar navbar navbar-static-top" style="background-color: #F8E8A2;">
+  <div class="container-fluid">
 
-    <nav class="nav navbar-nav navbar-left">
-      <h1>Almemo</h1>
+    <nav class="col-md-2 col-lg-2">
+    <%= image_tag 'logo 3.png',size: 9*9 %>
     </nav>
-    <nav>
+     <div class="col-md-4">
+          <p class = "search"><%= search_form_for(@search, url:searches_index_path) do |f| %>
+            <%= f.text_field :title_or_comment_cont, placeholder:"イベントのタイトル、コメントを入力してください", size:5*10 %>
+            <%= f.submit '検索' %>
+          <% end %></p>
+    </div>
+    <nav class="col-md-6">
       <ul class="nav navbar-nav navbar-right">
 
         <!--if文でサインインとアウト時の表示を変更-->
         <% if guest_signed_in? %>
-          <%= search_form_for(@search, url:searches_index_path) do |f| %>
-            <%= f.text_field :title_or_comment_cont, placeholder:"イベントのタイトル、コメントを入力してください", size:5*10 %>
-            <%= f.submit '検索' %>
-          <% end %>
           <li class = "guest_name">
             <% if current_guest.name.nil? %>
               <%= "ようこそ" + current_guest.email + "様" %>

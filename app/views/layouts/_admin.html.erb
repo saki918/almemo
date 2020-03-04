@@ -8,10 +8,7 @@
       <ul class="nav navbar-nav navbar-right">
         <!--if文でサインインとアウト時の表示を変更-->
         <% if admin_signed_in? %>
-          <%= search_form_for(@search, url:searches_index_path) do |f| %>
-            <%= f.text_field :title_cont %>
-            <%= f.submit '検索' %>
-          <% end %>
+        
         <li><%= link_to 'My Calender', events_path %></li>
         <li><%= link_to 'ジャンル一覧', admin_genres_path %></li>
         <li><%= link_to 'Log Out', destroy_guest_session_path, method: :delete %></li>
