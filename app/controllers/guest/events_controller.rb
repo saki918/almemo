@@ -14,8 +14,8 @@ class Guest::EventsController < ApplicationController
     @genres = Genre.all
     @event = Event.find(params[:id])
     @images = @event.images
-    # @event.event_members.build
-    # @event.images.build
+    @event.event_members.build
+    @event.images.build
   end
 
   def new
@@ -32,25 +32,25 @@ class Guest::EventsController < ApplicationController
 
   def create
     @new_event = current_guest.events.new(event_params)
+    new_event_members = params[:event][:event_members_attributes]
+    new_event_images = params[:event][:images_attributes]
     if @new_event.save
-      # binding.pry
       # {"utf8"=>"✓", "authenticity_token"=>"cdy74XCP1iJiRkRU8gGUIRs1mbHJVuAG7bve63274Gbotwx3D30Rewh7MFVnR8LzwZUJRS6SaOUB8Vjy3UQjhA==", "event"=>{"genre_id"=>"date", "event_members_attributes"=>{"0"=>{"member_id"=>["3", "5"]}}, "title"=>"title", "start_time(1i)"=>"2020", "start_time(2i)"=>"2", "start_time(3i)"=>"27", "start_time(4i)"=>"10", "start_time(5i)"=>"39", "finish_time(1i)"=>"2020", "finish_time(2i)"=>"2", "finish_time(3i)"=>"27", "finish_time(4i)"=>"10", "finish_time(5i)"=>"39", "comment"=>"commet", "images_attributes"=>{"0"=>{"refile_id"=>[#<ActionDispatch::Http::UploadedFile:0x00007f9af4580818 @tempfile=#<Tempfile:/tmp/RackMultipart20200227-7346-83ibvy.png>, @original_filename="shopping.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"event[images_attributes][0][refile_id][]\"; filename=\"shopping.png\"\r\nContent-Type: image/png\r\n">]}}}, "commit"=>"イベント作成"}
-      unless params[:event][:event_members_attributes].nil?
+      unless new_event_members.nil?
         # if params[:event][:event_members_attributes].blank?
-
-        params[:event][:event_members_attributes]['0']['member_id'].each do |member_id|
+        
+        new_event_members['0']['member_id'].each do |member_id|
           @new_event.event_members.create(member_id: member_id.to_i)
         end
       end
-      unless params[:event][:images_attributes].nil?
-        params[:event][:images_attributes]['0']['refile_id'].each do |refile_id|
+      unless new_event_images.nil?
+        new_event_images['0']['refile_id'].each do |refile_id|
           @new_event.images.create(refile_id: refile_id)
         end
       end
-
+      
       redirect_to @new_event, notice: 'イベントの作成に成功しました！'
     else
-
       @genres = Genre.all
       # @new_event = current_guest.events.new
       @new_event.event_members.build
@@ -60,24 +60,33 @@ class Guest::EventsController < ApplicationController
     end
     # binding.pry
   end
-
+  
   def update
+    @genres = Genre.all
     @event = Event.find(params[:id])
+    @images = @event.images
+    @event.event_members.build
+    @event.images.build
+    new_event_members = params[:event][:event_members_attributes]
+    new_event_images = params[:event][:images_attributes]
     if @event.update(event_params)
-      unless params[:event][:event_members_attributes].nil?
+      unless new_event_members.nil?
         # if params[:event][:event_members_attributes].blank?
 
-        params[:event][:event_members_attributes]['0']['member_id'].each do |member_id|
-          @event.event_members.create(member_id: member_id.to_i)
+        new_event_members['0']['member_id'].each do |member_id|
+          @new_event.event_members.create(member_id: member_id.to_i)
         end
       end
-      unless params[:event][:images_attributes].nil?
-        params[:event][:images_attributes]['0']['refile_id'].each do |refile_id|
+      if new_event_images > @event.event_images.build
+        new_event_images['0']['refile_id'].each do |refile_id|
           @event.images.create(refile_id: refile_id)
         end
+      else
+        @event.event_images.save(member_id: member_id.to_i)
       end
       redirect_to @event, notice: 'イベントを編集しました！'
     else
+      # binding.pry
       render 'edit'
     end
   end
