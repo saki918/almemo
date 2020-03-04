@@ -2,7 +2,7 @@
 <p><%= notice %></p>
   <%= link_to "イベント新規作成", new_event_path %>
   <%= month_calendar events: @events do |date, event| %>
-    <%= date.to_formatted_s(:default) %>
+    <%= date.to_formatted_s(:date) %>
     <% event.each do |event| %>
     <div>
       <%= link_to event_path(event) do %>
