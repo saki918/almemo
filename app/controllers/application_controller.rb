@@ -5,13 +5,19 @@ class ApplicationController < ActionController::Base
   # サイトに攻撃用のコードを仕込むことで、アクセスしたユーザーに対して意図しない操作を行わせる
   # 攻撃を防ぐ
   protect_from_forgery with: :exception
-  before_action :search
+  before_action :event_search
+  before_action :member_search
 
   protected
-  def search
-    @search = Event.ransack(params[:q])
-    @events = @search.result
+  def event_search
+    @event_search = Event.ransack(params[:q])
+    @events = @event_search.result
   end
+  def member_search
+    @member_search = Member.ransack(params[:q])
+    @members = @member_search.result
+  end
+
   def after_sign_in_path_for(resource)
     case resource
     when Guest
