@@ -1,23 +1,21 @@
 <h1>Guest::Events#show</h1>
 <p>Find me in app/views/guest/events/show.html.erb</p>
-<p><%= notice %></p>
-  <%= "ジャンル" %>
-  <%= image_tag @event.genre.icon_id.to_s, size:5*5 %><br>
-  <%= "タイトル" %>
-  <%= @event.title %><br>
-  <%= "参加メンバー" %>
+  <%= image_tag @event.genre.icon_id.to_s, size:9*9%>
+  <span class = "event_title"><%= @event.title %></span>
+  <h3><%= "メンバー" %>
   <% @event.event_members.each do |member| %>
   <%= member.member.name %>
-  <% end %><br>
-  <%= "開始時間" %>
+  <% end %></h3>
+  <h3><%= "開始時間" %>
   <%= @event.start_time.to_s(:published_on) %><br>
   <%= "終了時間" %>
-  <%= @event.finish_time.to_s(:published_on) %><br>
-  <%= "コメント" %>
-  <%= @event.comment %><br>
-  <%= "投稿画像" %>
+  <%= @event.finish_time.to_s(:published_on) %></h3>
+  <h3><%= "コメント" %>
+  <%= @event.comment %></h3>
+  <h3><%= "投稿画像" %></h3><br>
   <% @images.each do |image| %>
-  <%= image_tag image.refile_id.to_s, size:20*20 %>
+
+  <%= image_tag image.refile_id.to_s, size:19*19 %>
   <% end %><br>
   <%= link_to "編集", edit_event_path(@event), class: "btn btn-success" %>
   <%= link_to "削除", event_path(@event), method: :delete, class: "btn btn-danger","data-confirm" => "削除しますか？" %>
