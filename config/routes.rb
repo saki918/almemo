@@ -8,7 +8,8 @@ Rails.application.routes.draw do
     resources :genres, except:[:show]
   end
   namespace :admin do
-    get 'searches/index'
+    get 'searches/event_index'
+    get 'searches/member_index'
   end
   namespace :admin do
     resources :members, except:[:new,:create,:edit,:index]
@@ -22,7 +23,8 @@ Rails.application.routes.draw do
   root 'guest/homes#top'
 
   scope module: :guest do
-    get 'searches/index'
+    get 'searches/event_index'
+    get 'searches/member_index'
   end
   scope module: :guest do
     delete :images, to: 'images#destroy_all'
@@ -31,7 +33,10 @@ Rails.application.routes.draw do
     resources :members, except:[:new,:edit,:index]
   end
   scope module: :guest do
-    resources :events
+    resources :events do
+      get 'events/event_members_edit'
+      get 'events/event_images_edit'
+    end
   end
   scope module: :guest do
     resources :guests, except:[:new,:create,:destroy,:index]
