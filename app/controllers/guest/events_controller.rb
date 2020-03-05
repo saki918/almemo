@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Guest::EventsController < ApplicationController
-  before_action :authenticate_guest!
+  before_action :current_guest
+  before_action :current_admin
   # before_action :search
 
   def show
@@ -16,6 +17,16 @@ class Guest::EventsController < ApplicationController
     @images = @event.images
     @event.event_members.build
     @event.images.build
+  end
+  def event_members_edit
+    @event = Event.find(params[:id])
+    @event_members = @event.members.all
+    @new_event_members = EventMember.new
+  end
+  def event_images_edit
+    @event = Event.find(params[:id])
+    @event_images = @event.images.all
+    @new_event_images = Image.new
   end
 
   def new
