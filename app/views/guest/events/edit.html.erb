@@ -3,7 +3,7 @@
 
 <%= render "layouts/error_messages", error: @event %>
 <%#= render "layouts/error_messages", error: genres %>
-<%= form_for (@event) do |f| %>
+<%= form_for (@event), url: event_events_event_members_edit_path(@event) do |f| %>
   <%= f.label :"ジャンル" %><br>
   <% @genres.each do |genre| %>
   <%= f.radio_button :genre_id, genre.id %>
@@ -26,7 +26,7 @@
     <%= b.label :"画像" %>
     <%= b.file_field :refile_id, {multiple: true} %>
   <% end %>
-  <%= f.submit "イベント作成", class: "btn btn-primary" %>
+  <%= f.submit "イベント更新", class: "btn btn-primary" %>
 <% end %>
 
   <%= form_tag({ controller: :images, action: :destroy_all }, method: :delete) do %>
