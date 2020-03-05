@@ -2,7 +2,7 @@
 
 class Guest::MembersController < ApplicationController
   before_action :current_guest
-
+  before_action :current_admin
   def show
     @member = Member.find(params[:id])
     @events = @member.events
