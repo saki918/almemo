@@ -1,13 +1,27 @@
 <table class="table">
+  <thead>
+  <tr>
+    <th></th>
+    <th>タイトル</th>
+    <th>メンバー</th>
+    <th>コメント</th>
+    <th>開始時間</th>
+    <th>終了時間</th>
+  </tr>
+  </thead>
   <% events.each do |event| %>
     <tr>
       <td><%= image_tag event.genre.icon_id.to_s, size:5*5 %></td>
       <td><%= link_to event.title, event %></td>
-      <td><%= event.event_members[@member].to_i.member.name %></td>
+      <% if event.event_members.present? %>
+        <td><%= event.event_members[0].member.name %></td>
+      <% else %>
+        <td></td>
+      <% end %>
       <td><%= event.comment %></td>
       <td><%= event.start_time.to_s(:published_on) %></td>
       <td><%= event.finish_time.to_s(:published_on) %></td>
-      <td><%= link_to "編集", edit_event_path(@event), class: "btn btn-success" %></td>
-      <td><%= link_to "削除", event_path(@event), method: :delete, class: "btn btn-danger","data-confirm" => "削除しますか？" %></td>
+      <td><%= link_to "編集", edit_event_path(event), class: "btn btn-success" %></td>
+      <td><%= link_to "削除", event_path(event), method: :delete, class: "btn btn-danger","data-confirm" => "削除しますか？" %></td>
     <% end %>
 </table>
