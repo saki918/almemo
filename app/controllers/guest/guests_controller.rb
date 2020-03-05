@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Guest::GuestsController < ApplicationController
-  before_action :authenticate_guest!
-
+  before_action :current_guest
+  before_action :current_admin
   def show
     @new_member = Member.new
     @members = current_guest.members
