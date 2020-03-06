@@ -21,13 +21,12 @@ Rails.application.routes.draw do
     resources :guests, except:[:new,:create]
   end
   root 'guest/homes#top'
-
+  
   scope module: :guest do
     get 'searches/event_index'
     get 'searches/member_index'
   end
   scope module: :guest do
-    delete :images, to: 'images#destroy_all'
   end
   scope module: :guest do
     resources :members, except:[:new,:edit,:index]
@@ -35,7 +34,15 @@ Rails.application.routes.draw do
   scope module: :guest do
     resources :events do
       get 'events/event_members_edit'
+      patch 'events/event_members_edit'
       get 'events/event_images_edit'
+
+      resources :eventmembers, only: [:create]
+      get 'eventmembers/edit'
+      delete :eventmembers, to: 'eventmembers#destroy_all'
+      resources :images, only: [:create]
+      get 'image/event_images_edit'
+      delete :images, to: 'images#destroy_all'
     end
   end
   scope module: :guest do
