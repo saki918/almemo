@@ -1,30 +1,31 @@
-<nav class="navbar navbar-inverse navbar-static-top">
-  <div class="container">
-
-    <nav class="nav navbar-nav navbar-left">
-      <h1>Almemo</h1>
+<nav class="navbar navbar navbar-static-top" style="background-color: #F8E8A2;">
+  <div class="container-fluid">
+    <nav class="col-md-2 col-lg-2">
+      <%= image_tag 'logo 3.png',size: 9*9 %>
     </nav>
-    <nav>
+    <div class="col-md-4">
+    <% if guest_signed_in? %>
+      <p class = "search"><%= search_form_for(@member_search, url:searches_member_index_path) do |f| %>
+      <%= f.text_field :name_cont, placeholder:"メンバーを検索する場合はこちら", size:5*10 %>
+      <%= f.submit '検索' %>
+      <% end %></p>
+      <p class = "search"><%= search_form_for(@event_search, url:searches_event_index_path) do |f| %>
+      <%= f.text_field :title_or_comment_cont, placeholder:"イベントのタイトル、コメントを検索する場合はこちら", size:5*10 %>
+      <%= f.submit '検索' %>
+      <% end %></p>
+    <% end %>
+    </div>
+    <nav class="col-md-6">
       <ul class="nav navbar-nav navbar-right">
-        <%
-=begin%>
- <%= search_form_for @search do |f| %>
-          <%= f.label :eventmember.name_or_title_or_comment, "検索する場合はこちら" %>
-          <%= f.search_field
-          :eventmember.name_or_title_or_comment %>
-          <%= f.submit "検索" %>
-        <% end %> 
-<%
-=end%>
         <!--if文でサインインとアウト時の表示を変更-->
         <% if guest_signed_in? %>
-        <li class = "guest_name">
-        <% if current_guest.name.empty? %>
-          <%= "ようこそ" + current_guest.email + "様" %>
-        <% else %>
-          <%= "ようこそ" + current_guest.name + "様" %>
-        <% end %>
-        </li>
+          <li class = "guest_name">
+            <% if current_guest.name.nil? %>
+              <%= "ようこそ" + current_guest.email + "様" %>
+            <% else %>
+              <%= "ようこそ" + current_guest.name + "様" %>
+            <% end %>
+          </li>
         <li><%= link_to 'My Calender', events_path %></li>
         <li><%= link_to 'My Page', guest_path(current_guest) %></li>
         <li><%= link_to 'Log Out', destroy_guest_session_path, method: :delete %></li>

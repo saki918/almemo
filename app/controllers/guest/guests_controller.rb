@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Guest::GuestsController < ApplicationController
-  before_action :authenticate_guest!
-
+  before_action :current_guest
+  before_action :current_admin
   def show
-    @new_member = current_guest.members.new
+    @new_member = Member.new
     @members = current_guest.members
   end
 
@@ -15,7 +15,7 @@ class Guest::GuestsController < ApplicationController
     if current_guest.update(guest_params)
       redirect_to current_guest, notice: 'プロフィールを更新しました！'
     else
-      render current_guest
+      render 'edit'
     end
   end
 

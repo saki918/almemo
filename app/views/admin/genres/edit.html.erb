@@ -1,0 +1,7 @@
+  <%= form_for(@new_genre, url: admin_genres_path ) do |f| %>
+        <%= f.label :name, :名前 %>
+        <%= f.text_field :name %>
+        <%= f.label :icon_id, :画像選択 %>
+        <%= f.file_field :icon_id %>
+    <%= f.submit %>
+  <% end %>

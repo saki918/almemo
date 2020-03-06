@@ -5,7 +5,19 @@ class ApplicationController < ActionController::Base
   # サイトに攻撃用のコードを仕込むことで、アクセスしたユーザーに対して意図しない操作を行わせる
   # 攻撃を防ぐ
   protect_from_forgery with: :exception
-protected
+  before_action :event_search
+  before_action :member_search
+
+  protected
+  def event_search
+    @event_search = Event.ransack(params[:q])
+    @events = @event_search.result
+  end
+  def member_search
+    @member_search = Member.ransack(params[:q])
+    @members = @member_search.result
+  end
+
   def after_sign_in_path_for(resource)
     case resource
     when Guest
@@ -22,7 +34,6 @@ protected
       new_admin_session_path
     end
   end
-
 #   def configure_permitted_parameters
 #     devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
 #    # sign_upの際にnameのデータ操作を許。追加したカラム。

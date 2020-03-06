@@ -1,11 +1,16 @@
-<div class = "col-md-offset-1 col-md-10 col-md-offset-1">
-  <%= link_to "イベント新規作成", new_event_path %>
-  <%= month_calendar events: @events do |date, event| %>
-    <%= date.to_formatted_s(:only_date) %>
-    <% event.each do |event| %>
-    <div>
-      <%= link_to event.title, event %>
-    </div>
+<%= link_to "イベント新規作成", new_event_path, class: "btn btn-success" %><br><br>
+<%= month_calendar events: @events do |date, event| %>
+  <%= date.to_formatted_s(:date) %>
+  <% event.each do |event| %>
+  <div>
+    <%= link_to event_path(event) do %>
+      <%- if Genre.find_by(id: event.genre_id).present? %>
+        <%= image_tag event.genre.icon_id.to_s, size:6*6 %>
+      <% else %>
+        <%= "なし"%>
+      <% end %>
+    <%= event.title %>
+    <% end %>
+  </div>
   <% end %>
-  <% end %>
-</div>
+<% end %>
