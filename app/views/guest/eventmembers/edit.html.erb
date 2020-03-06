@@ -1,0 +1,26 @@
+<h1>Guest::Eventmembers#edit</h1>
+<p>Find me in app/views/guest/eventmembers/edit.html.erb</p>
+<%= form_tag({ controller: :eventmembers, action: :destroy_all }, method: :delete) do %>
+  <h3><%= label_tag "イベントから外したいメンバーを選択" %></h3>
+  <% @event_members.each do |event_member| %>
+    <span class = "eventmember_name"><%= check_box_tag "deletes[#{ event_member.id }]", event_member.id %>
+    <%= label_tag "member_name",event_member.member.name %></span>
+    
+    <% end %>
+    <%= submit_tag "削除", class: "btn btn-danger","data-confirm" => "選択したメンバーを削除しますか？" %>
+<% end %><br>
+
+<%= form_for (@new_event_members), url:event_eventmembers_path(@event.id) do |f| %>
+  <h3><%= f.label :追加したいメンバーを選択 %></h3>
+  <%
+=begin%>
+ <span class = "not_eventmember_name"><%= f.collection_check_boxes(:member_id, Member.find(@not_event_members), :id, :name)
+  %></span> 
+<%
+=end%>
+  <% Member.find(@not_event_members).each do |not_event_member| %>
+    <span class = "not_eventmember_name"><%= f.check_box :member_ids,{ multiple: true, checked: not_event_member[:checked], disabled: not_event_member[:disabled], include_hidden: false }, not_event_member[:id] %>
+    <%= not_event_member.name %></span>
+  <% end %>
+  <%= f.submit "メンバーを追加して画像編集ページへ", class: "btn btn-primary" %>
+<% end %>
