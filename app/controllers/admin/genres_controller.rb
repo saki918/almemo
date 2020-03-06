@@ -1,4 +1,5 @@
 class Admin::GenresController < ApplicationController
+  before_action :current_admin
   def new
     @new_genre = Genre.new
   end
