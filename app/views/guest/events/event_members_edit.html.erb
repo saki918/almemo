@@ -1,0 +1,14 @@
+<%= form_tag({ controller: :images, action: :destroy_all }, method: :delete) do %>
+    <%= "イベントから外したいメンバーを選択" %>
+  <% @event_members.each do |event_member| %>
+    <%= check_box_tag "deletes[#{ event_member.id }]", event_member.id %>
+    <%= label_tag "member_name",event_member.name %>
+    <% end %>
+    <%= submit_tag "削除", class: "btn btn-danger","data-confirm" => "選択したメンバーを削除しますか？" %>
+<% end %>
+
+<%= form_for (@new_event_members), url:event_events_event_images_edit_path(@event.id) do |f| %>
+  <%= f.label :追加したいメンバーを選択 %>
+  <%= f.collection_check_boxes(:member_id, Member.find(@not_event_members), :id, :name)
+  %>
+<% end %>
