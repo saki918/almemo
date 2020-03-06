@@ -33,10 +33,6 @@ Rails.application.routes.draw do
   end
   scope module: :guest do
     resources :events do
-      get 'events/event_members_edit'
-      patch 'events/event_members_edit'
-      get 'events/event_images_edit'
-
       resources :eventmembers, only: [:create]
       get 'eventmembers/edit'
       delete :eventmembers, to: 'eventmembers#destroy_all'
