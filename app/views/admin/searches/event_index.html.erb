@@ -1,0 +1,3 @@
+<h1><%= params[:q][:title_or_comment_cont] + "の検索結果" %></h1>
+
+<%= render "guest/events/events", events: @search_events %>

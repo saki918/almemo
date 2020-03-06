@@ -1,28 +1,15 @@
 <%= render "layouts/error_messages", error: event %>
+<%#= render "layouts/error_messages", error: genres %>
 <%= form_for (event) do |f| %>
   <%= f.label :"ジャンル" %><br>
-  <%= f.radio_button :genre_id,  "meal" %>
-  <%= image_tag "meal.png", width: "30px" %>
-  <%= f.radio_button :genre_id, "date" %>
-  <%= image_tag "date.png", width: "30px" %>
-  <%= f.radio_button :genre_id,  "work" %>
-  <%= image_tag "work.png", width: "30px" %>
-  <%= f.radio_button :genre_id, "sports" %>
-  <%= image_tag "sports.png", width: "30px" %>
-  <%= f.radio_button :genre_id, "shopping" %>
-  <%= image_tag "shopping.png", width: "30px" %>
-  <%= f.radio_button :genre_id, "drive" %>
-  <%= image_tag "drive.png", width: "30px" %>
-  <%= f.radio_button :genre_id, "drinking_party" %>
-  <%= image_tag "drinking-party.png", width: "30px" %>
-  <%= f.radio_button :genre_id, "movie" %>
-  <%= image_tag "movie.png", width: "30px" %>
-  <%= f.radio_button :genre_id, "celebration" %>
-  <%= image_tag "celebration.png", width: "30px" %><br>
-  <%= f.fields_for :event_members, @new_event.event_members.build do |a| %>
+  <% @genres.each do |genre| %>
+  <%= f.radio_button :genre_id, genre.id %>
+  <%= image_tag genre.icon_id.to_s, size:5*5 %>
+  <% end %><br>
+  <%= f.fields_for :event_members do |a| %>
     <%= a.label :"メンバー" %>
-    <%= a.collection_select :member_id,current_guest.members, :id, :name, { prompt: '選択してください' }, { class: 'pub' , multiple: true} %>
-  <% end %>
+    <%= a.collection_select :member_id,current_guest.members, :id, :name, {include_hidden: false},input_html: {multiple: "multiple"}, id: 'select',multiple: "multiple" %>
+  <% end %><br>
 
   <%= f.label :"タイトル" %>
   <%= f.text_field :title %><br>
@@ -32,9 +19,13 @@
   <%= f.datetime_select :finish_time %><br>
   <%= f.label :"コメント" %>
   <%= f.text_area :comment %><br>
-  <%= f.fields_for :images, @new_event.images.build do |b| %>
+  <%= f.fields_for :images do |b| %>
     <%= b.label :"画像" %>
-    <%= b.file_field :refile_id, multiple: true %><br>
+    <%= b.file_field :refile_id, {multiple: true} %><br>
   <% end %>
   <%= f.submit "イベント作成", class: "btn btn-primary" %>
 <% end %>
+
+
+
+
