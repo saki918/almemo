@@ -19,7 +19,7 @@
 <%
 =end%>
   <% Member.find(@not_event_members).each do |not_event_member| %>
-    <span class = "not_eventmember_name"><%= f.check_box :member_ids,{ multiple: true, checked: not_event_member[:checked], disabled: not_event_member[:disabled], include_hidden: false }, not_event_member[:id] %>
+    <span class = "not_eventmember_name"><%= f.check_box :member_id,{ multiple: true, checked: not_event_member[:checked], disabled: not_event_member[:disabled], include_hidden: false }, not_event_member[:id] %>
     <%= not_event_member.name %></span>
   <% end %>
   <%= f.submit "メンバーを追加して画像編集ページへ", class: "btn btn-primary" %>
