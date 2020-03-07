@@ -1,13 +1,9 @@
-<div class = "col-md-offset-1 col-md-10 col-md-offset-1">
-  <h1>Guest::Guests#edit</h1>
-  <p>Find me in app/views/guest/guests/edit.html.erb</p>
-  <%= render "layouts/error_messages", error: current_guest %>
-  <%= form_for(current_guest) do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-    <%= f.submit %>
-  <% end %>
-  <%= link_to "パスワードを変更する", edit_guest_registration_path, class:"btn btn-primary" %>
-</div>
+<%= render "layouts/error_messages", error: @guest %>
+<%= form_for(@guest) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <%= f.submit %>
+<% end %>
+<%= link_to "パスワードを変更する", edit_guest_registration_path, class:"btn btn-primary" %>
