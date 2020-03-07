@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'searches/event_index'
     get 'searches/member_index'
+    get 'searches/guest_index'
   end
   namespace :admin do
     resources :members, except:[:new,:create,:edit,:index]
@@ -37,7 +38,7 @@ Rails.application.routes.draw do
       get 'eventmembers/edit'
       delete :eventmembers, to: 'eventmembers#destroy_all'
       resources :images, only: [:create]
-      get 'image/event_images_edit'
+      get 'images/event_images_edit', as:'images_edit'
       delete :images, to: 'images#destroy_all'
     end
   end
