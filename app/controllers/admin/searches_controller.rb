@@ -11,4 +11,9 @@ class Admin::SearchesController < ApplicationController
     @member_search = Member.ransack(params[:q])
     @search_members = @member_search.result
   end
+
+  def guest_index
+    @guest_search = Guest.ransack(params[:q])
+    @search_guests = @guest_search.result
+  end
 end

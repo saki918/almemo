@@ -1,6 +1,10 @@
 <h1>Guest::Events#show</h1>
 <p>Find me in app/views/guest/events/show.html.erb</p>
-  <%= image_tag @event.genre.icon_id.to_s, size:9*9%>
+  <%- if Genre.find_by(id: @event.genre_id).present? %>
+        <%= image_tag @event.genre.icon_id.to_s, size:9*9 %>
+      <% else %>
+        <%= "なし"%>
+      <% end %>
   <span class = "event_title"><%= @event.title %></span>
   <h3><%= "メンバー" %>
   <% @event.event_members.each do |member| %>
