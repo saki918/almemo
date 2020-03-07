@@ -11,7 +11,11 @@
   </thead>
   <% events.each do |event| %>
     <tr>
-      <td><%= image_tag event.genre.icon_id.to_s, size:5*5 %></td>
+      <td><%- if Genre.find_by(id: event.genre_id).present? %>
+        <%= image_tag event.genre.icon_id.to_s, size:6*6 %>
+      <% else %>
+        <%= "ジャンルアイコンなし"%>
+      <% end %></td>
       <td><%= link_to event.title, event %></td>
       <% if event.event_members.present? %>
         <td><%= event.event_members[0].member.name %></td>
@@ -22,6 +26,6 @@
       <td><%= event.start_time.to_s(:published_on) %></td>
       <td><%= event.finish_time.to_s(:published_on) %></td>
       <td><%= link_to "編集", edit_event_path(event), class: "btn btn-success" %></td>
-      <td><%= link_to "削除", event_path(event), method: :delete, class: "btn btn-danger","data-confirm" => "削除しますか？" %></td>
+      <td><%= link_to "削除", event_path(event), method: :delete, class: "btn btn-danger","data-confirm" => "削除しますか？" %></td></tr>
     <% end %>
 </table>
