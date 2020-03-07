@@ -3,7 +3,7 @@
 
 <%= render "layouts/error_messages", error: @event %>
 <%#= render "layouts/error_messages", error: genres %>
-<%= form_for (@event), url: event_events_event_members_edit_path(@event) do |f| %>
+<%= form_for (@event) do |f| %>
   <%= f.label :"ジャンル" %><br>
   <% @genres.each do |genre| %>
   <%= f.radio_button :genre_id, genre.id %>
@@ -29,7 +29,7 @@
   <%= f.submit "イベント更新", class: "btn btn-primary" %>
 <% end %>
 
-  <%= form_tag({ controller: :images, action: :destroy_all }, method: :delete) do %>
+  <%= form_tag("/events/#{@event.id}/images", method: :delete) do %>
     <% @images.each do |image| %>
     <div>
     <%= check_box_tag "deletes[#{ image.id }]", image.id %>

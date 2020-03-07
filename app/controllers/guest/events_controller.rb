@@ -15,18 +15,9 @@ class Guest::EventsController < ApplicationController
     @genres = Genre.all
     @event = Event.find(params[:id])
     @images = @event.images
-    @event.event_members.build
-    @event.images.build
-  end
-  def event_members_edit
-    @event = Event.find(params[:id])
-    @event_members = @event.members.all
-    @new_event_members = EventMember.new
-  end
-  def event_images_edit
-    @event = Event.find(params[:id])
-    @event_images = @event.images.all
-    @new_event_images = Image.new
+    # @event.event_members.build
+    # @event.images.build
+    # binding.pry
   end
 
   def new
@@ -76,26 +67,27 @@ class Guest::EventsController < ApplicationController
     @genres = Genre.all
     @event = Event.find(params[:id])
     @images = @event.images
-    @event.event_members.build
-    @event.images.build
-    new_event_members = params[:event][:event_members_attributes]
-    new_event_images = params[:event][:images_attributes]
+    # @event.event_members.build
+    # @event.images.build
+    # new_event_members = params[:event][:event_members_attributes]
+    # new_event_images = params[:event][:images_attributes]
     if @event.update(event_params)
-      unless new_event_members.nil?
-        # if params[:event][:event_members_attributes].blank?
+      # unless new_event_members.present?
+      #   # if params[:event][:event_members_attributes].blank?
 
-        new_event_members['0']['member_id'].each do |member_id|
-          @new_event.event_members.create(member_id: member_id.to_i)
-        end
-      end
-      if new_event_images > @event.event_images.build
-        new_event_images['0']['refile_id'].each do |refile_id|
-          @event.images.create(refile_id: refile_id)
-        end
-      else
-        @event.event_images.save(member_id: member_id.to_i)
-      end
-      redirect_to @event, notice: 'イベントを編集しました！'
+      #   new_event_members['0']['member_id'].each do |member_id|
+      #     @new_event.event_members.create(member_id: member_id.to_i)
+      #   end
+      # end
+      # if new_event_images > @event.event_images.build
+      #   new_event_images['0']['refile_id'].each do |refile_id|
+      #     @event.images.create(refile_id: refile_id)
+      #   end
+      # else
+      #   @event.event_images.save(member_id: member_id.to_i)
+      # end
+      # binding.pry
+      redirect_to event_eventmembers_edit_path (@event), notice: 'イベントを編集しました！'
     else
       # binding.pry
       render 'edit'
