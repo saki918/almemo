@@ -6,9 +6,9 @@
   </ul>
 <% end %>
 
-  <h1>マイページ</h1>
-  <%= link_to "プロフィール編集", edit_guest_path(@guest), class: "btn btn-success" %>
-  <%= render "guest/members/form", member: @new_member %>
+  <h1>マイページ</h1><br>
+  <%= link_to "プロフィール編集", edit_guest_path(@guest), class: "btn btn-success" %><br><br>
+  <h4><%= render "guest/members/form", member: @new_member %></h4>
 
   <%= render "guest/members/members", members: @guest.members %>
 </div>
