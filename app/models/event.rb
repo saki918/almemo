@@ -12,6 +12,13 @@ class Event < ApplicationRecord
 
   validates :title, presence: true
   validates :start_time, presence: true
+  validates :finish_time, presence: true
+  validate :start_end_check
+
+  def start_end_check
+      errors.add(:finish_time,'   終了時間の日付、時間を開始時間後の日付と時間になるように記入してください。') unless
+      start_time < finish_time
+  end
 
   default_scope -> { order(start_time: :asc) }
 
