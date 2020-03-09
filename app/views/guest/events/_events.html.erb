@@ -4,7 +4,6 @@
     <th></th>
     <th>タイトル</th>
     <th>メンバー</th>
-    <th>コメント</th>
     <th>開始時間</th>
     <th>終了時間</th>
   </tr>
@@ -22,7 +21,6 @@
       <% else %>
         <td></td>
       <% end %>
-      <td><%= event.comment %></td>
       <td><%= event.start_time.to_s(:published_on) %></td>
       <td><%= event.finish_time.to_s(:published_on) %></td>
       <td><%= link_to "編集", edit_event_path(event), class: "btn btn-success" %></td>
