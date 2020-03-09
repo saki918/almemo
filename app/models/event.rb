@@ -3,8 +3,8 @@
 class Event < ApplicationRecord
   belongs_to :guest
   belongs_to :genre
-  has_many :event_members
-  has_many :images
+  has_many :event_members, dependent: :destroy
+  has_many :images,dependent: :destroy
   has_many :members, through: :event_members
   # accepts_nested_attributes_forを使うことで簡単に1対多のモデルを一度に更新するフォームを作成することできます。
   accepts_nested_attributes_for :event_members
