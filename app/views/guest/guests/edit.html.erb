@@ -1,9 +1,9 @@
 <%= render "layouts/error_messages", error: @guest %>
 <%= form_for(@guest) do |f| %>
   <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name, autofocus: true %>
   <%= f.label :email %>
   <%= f.text_field :email %>
-  <%= f.submit %>
-<% end %>
+  <%= f.submit "プロフィールの更新", class: "btn btn-success" %>
+<% end %><br>
 <%= link_to "パスワードを変更する", edit_guest_registration_path, class:"btn btn-primary" %>
