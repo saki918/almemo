@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :guests
   
   namespace :admin do
-    resources :genres, except:[:show]
+    resources :genres, only:[:new,:index,:create,:destroy]
   end
   namespace :admin do
     get 'searches/event_index'
@@ -13,13 +13,7 @@ Rails.application.routes.draw do
     get 'searches/guest_index'
   end
   namespace :admin do
-    resources :members, except:[:new,:create,:edit,:index]
-  end
-  namespace :admin do
-    resources :events, except:[:new,:create,:index]
-  end
-  namespace :admin do
-    resources :guests, except:[:new,:create]
+    resources :guests, only:[:index]
   end
   root 'guest/homes#top'
   
@@ -27,11 +21,11 @@ Rails.application.routes.draw do
     get 'searches/event_index'
     get 'searches/member_index'
   end
-  scope module: :guest do
-  end
+
   scope module: :guest do
     resources :members, except:[:new,:edit,:index]
   end
+
   scope module: :guest do
     resources :events do
       resources :eventmembers, only: [:create]
@@ -42,6 +36,7 @@ Rails.application.routes.draw do
       delete :images, to: 'images#destroy_all'
     end
   end
+  
   scope module: :guest do
     resources :guests, except:[:new,:create,:destroy,:index]
   end
