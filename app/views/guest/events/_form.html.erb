@@ -1,30 +1,37 @@
 <%= render "layouts/error_messages", error: event %>
 <%#= render "layouts/error_messages", error: genres %>
-<h3><%= form_for (event) do |f| %>
-  <%= f.label :"ジャンル(１つ選択してください)" %><br><br>
+<%= form_for (event) do |f| %>
+  <div class = "row">
+  <h3><%= f.label :"ジャンル(１つ選択してください)" %></h3><br><br>
   <% @genres.each do |genre| %>
+  <div class = "col-xs-2">
   <%= f.radio_button :genre_id, genre.id %>
   <%= image_tag genre.icon_id.to_s, size:8*8 %>
-  <% end %><br><br>
+  </div>
+  <% end %>
+  </div><br>
+  <div>
   <%= f.fields_for :event_members do |a| %>
-    <%= a.label :"メンバー" %>
+    <h3><%= a.label :"メンバー" %>
     <%= a.collection_select :member_id,current_guest.members, :id, :name, {include_hidden: false},input_html: {multiple: "multiple"}, id: 'select',multiple: "multiple" %>
   <% end %><br><br>
-
   <%= f.label :"タイトル" %>
   <%= f.text_field :title %><br><br>
   <%= f.label :"開始時間" %>
   <%= f.datetime_select :start_time %><br><br>
   <%= f.label :"終了時間" %>
-  <%= f.datetime_select :finish_time %><br><br>
-  <%= f.label :"コメント" %>
-  <%= f.text_area :comment, size: "80x5" %><br><br>
-  <%= f.fields_for :images do |b| %>
+  <%= f.datetime_select :finish_time %></h3>
+  <h4>開始時間と終了時間を同じ時間で登録しないようにしてください！</h4><br><br>
+  <h3><%= f.label :"コメント" %>
+  <%= f.text_area :comment %><br><br>
+  <%= f.fields_for :images, include_id: false do |b| %>
     <%= b.label :"画像" %>
-    <%= b.file_field :refile_id, {multiple: true} %></h3><br><br>
+    <%= b.file_field :refile_id, {multiple: true}%></h3>
   <% end %>
+  </div>
   <%= f.submit "イベント作成", class: "btn btn-primary" %>
 <% end %>
+
 
 
 
