@@ -2,19 +2,24 @@
 <%= render "layouts/error_messages", error: @event %>
 <%#= render "layouts/error_messages", error: genres %>
 <%= form_for (@event) do |f| %>
-  <h3><%= f.label :"ジャンル" %><br>
-  <% @genres.each do |genre| %>
-  <%= f.radio_button :genre_id, genre.id %>
-  <%= image_tag genre.icon_id.to_s, size:8*8 %>
-  <% end %><br><br><br>
-  <%= f.label :"タイトル" %>
+  <div class = "row" >
+    <h3><%= f.label :"ジャンル(１つ選択してください)" %></h3><br>
+    <% @genres.each do |genre| %>
+    <div class = "col-md-2 col-xs-2" >
+      <%= f.radio_button :genre_id, genre.id %>
+      <%= image_tag genre.icon_id.to_s, size:8*8 %>
+    </div>
+    <% end %><br><br><br>
+  </div>
+  <h3><%= f.label :"タイトル" %>
   <%= f.text_field :title %><br><br>
   <%= f.label :"開始時間" %>
   <%= f.datetime_select :start_time %><br>
   <%= f.label :"終了時間" %>
-  <%= f.datetime_select :finish_time %><br><br>
-  <%= f.label :"コメント" %>
-  <%= f.text_area :comment, size: "80x5" %></h3><br><br>
+  <%= f.datetime_select :finish_time %></h3>
+  <h4>開始時間と終了時間を同じ時間で登録しないようにしてください！</h4><br><br>
+  <h3><%= f.label :"コメント" %>
+  <%= f.text_area :comment %></h3><br><br>
   <%= f.submit "イベントを更新してメンバー編集ページへ", class: "btn btn-primary" %>
 <% end %>
 
