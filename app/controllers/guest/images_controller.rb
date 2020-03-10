@@ -4,7 +4,7 @@ class Guest::ImagesController < ApplicationController
   def event_images_edit
     @event = Event.find(params[:event_id])
     @event_images = @event.images
-    @new_event_images = @event.images.new
+    @new_event_images = Image.new(event_id: @event.id)
   end
   def create
     # binding.pry
@@ -14,7 +14,7 @@ class Guest::ImagesController < ApplicationController
       @new_event_images.refile_id = refile_id
       @new_event_images.save
     end
-    redirect_to event_path(@event)
+    redirect_to request.referer
   end
   def destroy_all
     # @images = Image.where(id: params[:image])
