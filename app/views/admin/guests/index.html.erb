@@ -1,5 +1,5 @@
 <%= search_form_for(@guest_search, url:admin_searches_guest_index_path) do |f| %>
   <%= f.text_field :name_or_email_cont, placeholder:"登録されているゲストを検索する場合はこちら", size:5*10 %>
-  <%= f.submit '検索' %>
+  <%= f.submit '検索', class: "btn btn-default" %>
 <% end %>
 <h1><%= "只今の登録人数" + Guest.count.to_s + "人" %></h1>
