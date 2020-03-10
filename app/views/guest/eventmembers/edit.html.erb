@@ -5,8 +5,8 @@
 <%= form_tag({ controller: :eventmembers, action: :destroy_all }, method: :delete) do %>
   <h3><%= label_tag "イベントから外したいメンバーを選択" %></h3>
   <% @event_members.each do |event_member| %>
-    <div class = "eventmember_name"><%= check_box_tag "deletes[#{ event_member.id }]", event_member.id %>
-    <%= label_tag "member_name",event_member.member.name %></div>
+    <span class = "eventmember_name"><%= check_box_tag "deletes[#{ event_member.id }]", event_member.id %>
+    <%= label_tag "member_name",event_member.member.name %></span>
     <% end %>
     <%= submit_tag "イベントメンバーから外す", class: "btn btn-danger ","data-confirm" => "選択したメンバーをイベントから外しますか？" %>
 <% end %><br>
