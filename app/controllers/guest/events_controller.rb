@@ -19,21 +19,6 @@ class Guest::EventsController < ApplicationController
     # @event.images.build
     # binding.pry
   end
-  def event_members_edit
-    @event = Event.find(params[:event_id])
-    @event_members = @event.members
-    @event_members_ids = @event.members.pluck(:member_id)
-    @members_ids = current_guest.members.pluck(:id)
-    @new_event_members = @event.event_members.new
-    @not_event_members = @members_ids - @event_members_ids
-    # binding.pry
-
-  end
-  def event_images_edit
-    @event = Event.find(params[:event_id])
-    @event_images = @event.images.all
-    @new_event_images = @event.images.new
-  end
 
   def new
     @genres = Genre.all

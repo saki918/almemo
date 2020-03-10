@@ -11,10 +11,10 @@ class Guest::MembersController < ApplicationController
   def create
     @new_member = Member.new(member_params)
     @new_member.guest_id = current_guest.id
-    # binding.pry
     if @new_member.save
+      # binding.pry
       # @new_member.guest_id == current_guest.id
-      redirect_to @new_member, notice: 'メンバーを作成しました！'
+      redirect_to request.referer, notice: 'メンバーを作成しました！'
     else
       # binding.pry
       # render 'guest/guests/show'
