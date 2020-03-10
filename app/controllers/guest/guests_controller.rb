@@ -4,16 +4,19 @@ class Guest::GuestsController < ApplicationController
   before_action :current_guest
   before_action :current_admin
   def show
+    @guest = Guest.find(params[:id])
     @new_member = Member.new
-    @members = current_guest.members
+    @members = @guest.members
   end
 
   def edit
+    @guest = Guest.find(params[:id])
   end
 
   def update
-    if current_guest.update(guest_params)
-      redirect_to current_guest, notice: 'プロフィールを更新しました！'
+    @guest = Guest.find(params[:id])
+    if @guest.update(guest_params)
+      redirect_to @guest, notice: 'プロフィールを更新しました！'
     else
       render 'edit'
     end

@@ -1,0 +1,14 @@
+<h1><%= params[:q][:name_or_email_cont] + "の検索結果" %></h1>
+<table class="table">
+  <thead>
+  <tr>
+    <th>名前</th>
+    <th>メールアドレス</th>
+  </tr>
+  </thead>
+<% @search_guests.each do |guest| %>
+  <tr>
+  <td><%= guest.name %></td>
+  <td><%= guest.email %></td>
+  <td><%= link_to "詳細", guest_path(guest), class: "btn btn-success" %></td>
+<% end %>

@@ -2,6 +2,8 @@ class Admin::GuestsController < ApplicationController
   before_action :current_admin
 
   def index
+    @guest_search = Guest.ransack(params[:q])
+    @guests = @guest_search.result
   end
 
   def show
