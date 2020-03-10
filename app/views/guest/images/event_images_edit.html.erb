@@ -2,20 +2,22 @@
   <h1>イベント画像編集ページ</h1>
   <span class = "title" >イベント画像一覧</span>
 <%= link_to "イベント編集終了", event_path(@event), class: "btn btn-warning btn-lg pull-right" %>
+  <div>
   <%= form_tag({ controller: :images, action: :destroy_all }, method: :delete) do %>
       <% @event_images.each do |image| %>
-      <div class = "col-md-3">
+      <div class = "col-md-4 col-xs-6">
       <%= check_box_tag "deletes[#{ image.id }]", image.id %>
       <%= image_tag image.refile_id.to_s, size:17*17 %>
       </div>
       <% end %>
+  </div>
+</div>
       <%= submit_tag "削除", class: "btn btn-danger pull-left","data-confirm" => "選択した画像を削除しますか？" %>
   <% end %>
-</div>
-<div class = "row" >
+<div class = "row">
   <div class = "new_event_images" >
     <%= form_for (@new_event_images), url:event_images_path(@event) do |f| %>
-      <h3><%= f.label :"追加画像選択画面" %></h3>
+      <h3><%= f.label :"追加画像選択画面(投稿した画像を再度選択すると同じ画像が２枚出力されるので、ご注意ください！)" %></h3>
       <%= f.file_field :refile_id, {multiple: true} %><br><br>
       <%= f.submit "画像の更新", class: "btn btn-primary" %>
     <% end %>
