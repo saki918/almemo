@@ -1,6 +1,6 @@
 <nav class="navbar navbar-static-top bg-danger">
     <nav class="col-md-2 col-xs-2">
-      <%= image_tag 'logo 3.png',size: 9*9 %>
+      <%= image_tag 'logo 3.png',size: 10*10 %>
     </nav>
     <div class="col-md-4 col-md-offset-0 col-xs-offset-2 col-xs-8">
       <p class = "search"><%= search_form_for(@member_search, url:admin_searches_member_index_path) do |f| %>
@@ -11,13 +11,13 @@
       <%= f.text_field :title_or_comment_cont, placeholder:"イベントのタイトル、コメントを検索する場合はこちら", size:5*9 %>
       <%= f.submit '検索', class: "btn btn-default" %>
       <% end %></p>
-    </div>
+    </div><br class = "br-tab">
     <nav class = "col-md-6 col-md-offset-0 col-xs-9 col-xs-offset-3">
       <ul class="nav navbar-nav">
         <!--if文でサインインとアウト時の表示を変更-->
         <% if admin_signed_in? %>
         <li><%= link_to 'トップページ', admin_guests_path %></li>
-        <li><%= link_to 'ジャンル一覧', admin_genres_path %></li>
+        <li><%= link_to 'ジャンル一覧', admin_genres_path %></li><br class = "br-tab">
         <li><%= link_to 'ログアウト', destroy_guest_session_path, method: :delete %></li>
         <% else %>
         <li><%= link_to 'Home', root_path %></li>
