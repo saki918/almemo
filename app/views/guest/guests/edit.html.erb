@@ -1,7 +1,8 @@
 <%= render "layouts/error_messages", error: @guest %>
+<h1>プロフィール編集ページ</h1><br>
 <%= form_for(@guest) do |f| %>
   <%= f.label :name %>
-  <%= f.text_field :name, autofocus: true %>
+  <%= f.text_field :name, autofocus: true %><br>
   <%= f.label :email %>
   <%= f.text_field :email %>
   <%= f.submit "プロフィールの更新", class: "btn btn-success" %>
