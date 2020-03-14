@@ -2,4 +2,4 @@
 
 Time::DATE_FORMATS[:datetime] = '%Y年-%m-%d %H:%M'
 Time::DATE_FORMATS[:published_on] = '%Y年%m月%d日 %H時%M分'
-Date::DATE_FORMATS[:date]      = '%Y年%m月%d日'
+Date::DATE_FORMATS[:date] = '%Y年%m月%d日'
