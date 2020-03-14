@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :admins
+  devise_for :admins, skip: [:passwords, :registrations], path: :admins, controllers: {
+    sessions: 'admins/sessions'
+  }
   devise_for :guests
 
   namespace :admin do
