@@ -1,9 +1,12 @@
 <% if current_guest %>
-<h1>マイページ</h1><br>
-<%= link_to "プロフィール編集", edit_guest_path(@guest), class: "btn btn-success" %><br><br>
-<h4><%= render "guest/members/form", member: @new_member %></h4>
+  <h1>マイページ</h1><br>
+  <%= link_to "プロフィール編集", edit_guest_path(@guest), class: "btn btn-success" %><br><br>
+  <h4><%= render "guest/members/form", member: @new_member %></h4>
+<% end %>
+<% if current_admin && @guest.name != nil %>
+  <h1><%= @guest.name %>のページ</h1>
 <% else %>
-<h1><%= @guest.name %>のページ</h1>
+  <h1><%= @guest.email %>のページ</h1>
 <% end %>
 <%= render "guest/members/members", members: @guest.members %>
 
