@@ -8,7 +8,7 @@
     <span class = "eventmember_name"><%= check_box_tag "deletes[#{ event_member.id }]", event_member.id %>
     <%= label_tag "member_name",event_member.member.name %></span>
     <% end %>
-    <%= submit_tag "イベントメンバーから外す", class: "btn btn-danger ","data-confirm" => "選択したメンバーをイベントから外しますか？" %>
+    <%= submit_tag "イベントメンバーから外す", data: { confirm: "選択したメンバーをイベントから外しますか？"}, class: "btn btn-danger" %>
 <% end %><br>
 
 <%= form_for (@new_event_members), url:event_eventmembers_path(@event.id) do |f| %>
