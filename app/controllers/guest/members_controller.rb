@@ -39,8 +39,7 @@ class Guest::MembersController < ApplicationController
   # def destroy
   #   member = Member.find(params[:id])
   #   member.destroy
-  #   redirect_to guest_path(current_guest),
-  #   notice: 'メンバーを削除しました！'
+  #   redirect_to guest_path(current_guest), notice: 'メンバーを削除しました！'
   # end
 
   private
