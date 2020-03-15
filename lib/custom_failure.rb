@@ -8,6 +8,6 @@ class CustomFailure < Devise::FailureApp
     flash[:notice] = 'セッションが切れました。再度ログインしてください。'
     flash.keep(:notice)
     p flash
-    redirect_to new_guest_session_url(subdomain: 'secure')
+    redirect_to new_guest_session_url
   end
 end
