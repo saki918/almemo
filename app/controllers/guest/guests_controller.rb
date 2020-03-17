@@ -16,7 +16,8 @@ class Guest::GuestsController < ApplicationController
   def update
     @guest = Guest.find(params[:id])
     if @guest.update(guest_params)
-      redirect_to @guest, notice: 'プロフィールを更新しました！'
+      redirect_to @guest,
+      notice: 'プロフィールを更新しました！'
     else
       render 'edit'
     end

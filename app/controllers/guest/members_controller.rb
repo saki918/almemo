@@ -5,6 +5,7 @@ class Guest::MembersController < ApplicationController
   before_action :current_admin
   def show
     @member = Member.find(params[:id])
+    @member_name = @member.name
     @events = @member.events
   end
 
@@ -12,30 +13,33 @@ class Guest::MembersController < ApplicationController
     @new_member = Member.new(member_params)
     @new_member.guest_id = current_guest.id
     if @new_member.save
-      # binding.pry
-      # @new_member.guest_id == current_guest.id
-      redirect_to request.referer, notice: 'メンバーを作成しました！'
+      redirect_to request.referer,
+      notice: 'メンバーを作成しました！'
     else
-      # binding.pry
-      # render 'guest/guests/show'
-      redirect_to guest_path(current_guest.id), flash: { error: @new_member.errors.full_messages }
+      @guest = Guest.find(params[:member][:guest_id])
+      @members = @guest.members
+      render 'guest/guests/show'
+      # redirect_to guest_path(current_guest.id), flash: { error: @new_member.errors.full_messages }
     end
   end
 
   def update
     @member = Member.find(params[:id])
     if @member.update(member_params)
-      redirect_to request.referer, notice: 'メンバーの名前を編集しました！'
+      redirect_to request.referer,
+      notice: 'メンバーの名前を編集しました！'
     else
-      render 'guests/show'
+      @member_name = Member.find(params[:id]).name
+      @events = @member.events
+      render 'show'
     end
   end
 
-  def destroy
-    member = Member.find(params[:id])
-    member.destroy
-    redirect_to guest_path(current_guest), notice: 'メンバーを削除しました！'
-  end
+  # def destroy
+  #   member = Member.find(params[:id])
+  #   member.destroy
+  #   redirect_to guest_path(current_guest), notice: 'メンバーを削除しました！'
+  # end
 
   private
 
