@@ -3,25 +3,25 @@
 <%= link_to "メンバー情報の編集を終了して画像編集ページへ", event_images_edit_path(@event), class: "btn btn-warning" %>
 <h3>イベント参加メンバー</h3>
 <%= form_tag({ controller: :eventmembers, action: :destroy_all }, method: :delete) do %>
-  <h3><%= label_tag "イベントから外したいメンバーを選択" %></h3>
-  <% @event_members.each do |event_member| %>
-    <span class = "eventmember_name"><%= check_box_tag "deletes[#{ event_member.id }]", event_member.id %>
+<h3><%= label_tag "イベントから外したいメンバーを選択" %></h3>
+<% @event_members.each do |event_member| %>
+<span class="eventmember_name"><%= check_box_tag "deletes[#{ event_member.id }]", event_member.id %>
     <%= label_tag "member_name",event_member.member.name %></span>
-    <% end %>
-    <%= submit_tag "イベントメンバーから外す", class: "btn btn-danger ","data-confirm" => "選択したメンバーをイベントから外しますか？" %>
+<% end %>
+<%= submit_tag "イベントメンバーから外す", data: { confirm: "選択したメンバーをイベントから外しますか？"}, class: "btn btn-danger" %>
 <% end %><br>
 
 <%= form_for (@new_event_members), url:event_eventmembers_path(@event.id) do |f| %>
-  <h3><%= f.label :追加したいメンバーを選択 %></h3>
-  <%
+<h3><%= f.label :追加したいメンバーを選択 %></h3>
+<%
 =begin%>
- <span class = "not_eventmember_name"><%= f.collection_check_boxes(:member_id, Member.find(@not_event_members), :id, :name)
-  %></span> 
+<span class="not_eventmember_name"><%= f.collection_check_boxes(:member_id, Member.find(@not_event_members), :id, :name)
+  %></span>
 <%
 =end%>
-  <% Member.find(@not_event_members).each do |not_event_member| %>
-    <span class = "not_eventmember_name"><%= f.check_box :member_id,{ multiple: true, checked: not_event_member[:checked], disabled: not_event_member[:disabled], include_hidden: false }, not_event_member[:id] %>
+<% Member.find(@not_event_members).each do |not_event_member| %>
+<span class="not_eventmember_name"><%= f.check_box :member_id,{ multiple: true, checked: not_event_member[:checked], disabled: not_event_member[:disabled], include_hidden: false }, not_event_member[:id] %>
     <%= not_event_member.name %></span>
-  <% end %><br><br>
-  <%= f.submit "メンバーを追加", class: "btn btn-primary" %>
+<% end %><br><br>
+<%= f.submit "メンバーを追加", class: "btn btn-primary" %>
 <% end %>

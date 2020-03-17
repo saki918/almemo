@@ -11,6 +11,7 @@ Bundler.require(*Rails.groups)
 module Almemo
   class Application < Rails::Application
     config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
+    config.autoload_paths += %W(#{config.root}/lib)
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
     # 　以下の記述を追記する(設定必須)

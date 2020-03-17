@@ -36,5 +36,5 @@ DMM WEBCAMP ポートフォリオ作品
 
 TwitterとQiitaのアカウントに今後の勉強の進捗を載せるので是非見てください。
 
-https://twitter.com/saki_n_918　　　　
+https://twitter.com/saki_n_918
 https://qiita.com/saki918

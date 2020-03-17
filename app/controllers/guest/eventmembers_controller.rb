@@ -23,15 +23,25 @@ class Guest::EventmembersController < ApplicationController
       @members_ids = current_guest.members.pluck(:id)
       @event_members_ids = @event.members.pluck(:member_id)
       @not_event_members = @members_ids - @event_members_ids
-      render 'edit',
-      notice: 'イベントメンバーを追加してください！'
+      flash[:notice] = 'イベントメンバーを追加してください！'
+      render 'edit'
     end
   end
   def destroy_all
-    # binding.pry
-    checked_data = params[:deletes].keys # ここでcheckされたデータを受け取っています。
-    EventMember.destroy(checked_data)
-    redirect_to event_eventmembers_edit_path,
-    notice: 'イベントメンバーから外しました！'
+    unless params[:deletes].nil?
+      checked_data = params[:deletes].keys # ここでcheckされたデータを受け取っています。
+      EventMember.destroy(checked_data)
+      redirect_to event_eventmembers_edit_path,
+      notice: 'イベントメンバーから外しました！'
+    else
+      @event = Event.find(params[:event_id])
+      @event_members = @event.event_members
+      @new_event_members = EventMember.new(event_id: params[:event_id])
+      @members_ids = current_guest.members.pluck(:id)
+      @event_members_ids = @event.members.pluck(:member_id)
+      @not_event_members = @members_ids - @event_members_ids
+      flash[:notice] = 'イベントから外すメンバーを選択してください！'
+      render 'edit'
+    end
   end
 end

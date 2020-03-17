@@ -2,38 +2,41 @@
 <% if current_guest %>
 <h4>メンバー名前を更新する場合はこちら⬇︎</h4>
 <%= form_for(@member) do |f| %>
-    <h4><%= f.label :名前の更新欄 %>
+<h3><%= @member_name + "が参加しているイベント一覧" %></h3><br>
+<% if current_guest %>
+<h4>メンバーの名前を更新する場合はこちら⬇︎</h4>
+<%= render "layouts/error_messages", error: @member %>
+<%= form_for(@member) do |f| %>
+<h4><%= f.label :名前の更新欄 %>
     <%= f.text_field :name %>
     <%= f.submit "メンバーの名前を更新する", class: "btn btn-primary" %>
-  <% end %></h4><br><br>
+    <% end %></h4><br><br>
 <% end %>
-<table class="table", id = "events">
-  <thead>
-  <tr>
-    <th></th>
-    <th>タイトル</th>
-    <th>メンバー</th>
-    <th>開始時間</th>
-    <th>終了時間</th>
-  </tr>
-  </thead>
-  <% @events.each do |event| %>
+<table class="table" , id="events">
+    <thead>
+        <tr>
+            <th></th>
+            <th>タイトル</th>
+            <th>メンバー</th>
+            <th>開始時間</th>
+            <th>終了時間</th>
+        </tr>
+    </thead>
+    <% @events.each do |event| %>
     <tr>
-      <td><%- if Genre.find_by(id: event.genre_id).present? %>
+        <td><%- if Genre.find_by(id: event.genre_id).present? %>
             <%= image_tag event.genre.icon_id.to_s, size:6*6 %>
-          <% else %>
+            <% else %>
             <%= "なし"%>
-          <% end %></td>
-      <td><%= link_to event.title, event %></td>
-      <td><%= @member.name %></td>
-      <td><%= event.start_time.to_s(:published_on) %></td>
-      <td><%= event.finish_time.to_s(:published_on) %></td>
-      <% if current_guest %>
-      <td><%= link_to "編集", edit_event_path(event), class: "btn btn-success" %></td>
-      <% end %>
-      <td><%= link_to "削除", event_path(event), method: :delete, class: "btn btn-danger","data-confirm" => "削除しますか？" %></td>
+            <% end %></td>
+        <td><%= link_to event.title, event %></td>
+        <td><%= @member.name %></td>
+        <td><%= event.start_time.to_s(:published_on) %></td>
+        <td><%= event.finish_time.to_s(:published_on) %></td>
+        <% if current_guest %>
+        <td><%= link_to "編集", edit_event_path(event), class: "btn btn-success" %></td>
+        <% end %>
+        <td><%= link_to "削除", event_path(event), method: :delete, class: "btn btn-danger","data-confirm" => "削除しますか？" %></td>
+    </tr>
     <% end %>
 </table>
-
-
-
