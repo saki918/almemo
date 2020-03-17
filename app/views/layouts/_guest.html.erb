@@ -1,38 +1,38 @@
 <nav class="navbar navbar navbar-static-top" style="background-color: #F8E8A2;">
     <nav class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-      <%= image_tag 'logo 3.png',size: 10*10 %>
+        <%= image_tag 'logo 3.png',size: 10*10 %>
     </nav>
     <div class="col-lg-4 col-lg-offset-0 col-md-4 col-md-offset-0 col-sm-offset-2 col-sm-8 col-xs-offset-2 col-xs-8">
-    <% if guest_signed_in? %>
-      <p class = "search"><%= search_form_for(@member_search, url:searches_member_index_path) do |f| %>
-      <%= f.text_field :name_cont, placeholder:"メンバーを検索する場合はこちら", size:5*9 %>
-      <%= f.submit '検索', class: "btn btn-default" %>
-      <% end %></p>
-      <p class = "search"><%= search_form_for(@event_search, url:searches_event_index_path) do |f| %>
-      <%= f.text_field :title_or_comment_cont, placeholder:"イベントのタイトル、コメントを検索する場合はこちら", size:5*9 %>
-      <%= f.submit '検索', class: "btn btn-default" %>
-      <% end %></p>
-    <% end %>
-    </div><br class = "br-tab">
-    <nav class="col-lg-6 col-lg-offset-0 col-md-6 col-md-offset-0 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-2">
-      <ul class="nav navbar-nav">
-        <!--if文でサインインとアウト時の表示を変更-->
         <% if guest_signed_in? %>
-          <li class = "guest_name">
-            <% if current_guest.name.nil? %>
-              <%= "ようこそ" + current_guest.email + "様" %>
-            <% else %>
-              <%= "ようこそ" + current_guest.name + "様" %>
-            <% end %>
-          </li>
-        <li><%= link_to 'My Calender', events_path %></li><br class = "br-tab">
-        <li><%= link_to 'My Page', guest_path(current_guest) %></li>
-        <li><%= link_to 'Log Out', destroy_guest_session_path, method: :delete %></li>
-        <% else %>
-        <li><%= link_to 'Home', root_path %></li>
-        <li><%= link_to 'sign up', new_guest_registration_path %></li>
-        <li><%= link_to 'login', new_guest_session_path %></li>
+        <p class="search"><%= search_form_for(@member_search, url:searches_member_index_path) do |f| %>
+            <%= f.text_field :name_cont, placeholder:"メンバーを検索する場合はこちら", size:5*9 %>
+            <%= f.submit '検索', class: "btn btn-default" %>
+            <% end %></p>
+        <p class="search"><%= search_form_for(@event_search, url:searches_event_index_path) do |f| %>
+            <%= f.text_field :title_or_comment_cont, placeholder:"イベントのタイトル、コメントを検索する場合はこちら", size:5*9 %>
+            <%= f.submit '検索', class: "btn btn-default" %>
+            <% end %></p>
         <% end %>
-      </ul>
+    </div><br class="br-tab">
+    <nav class="col-lg-6 col-lg-offset-0 col-md-6 col-md-offset-0 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-2">
+        <ul class="nav navbar-nav">
+            <!--if文でサインインとアウト時の表示を変更-->
+            <% if guest_signed_in? %>
+            <li class="guest_name">
+                <% if current_guest.name.nil? %>
+                <%= "ようこそ" + current_guest.email + "様" %>
+                <% else %>
+                <%= "ようこそ" + current_guest.name + "様" %>
+                <% end %>
+            </li>
+            <li><%= link_to 'My Calender', events_path %></li><br class="br-tab">
+            <li><%= link_to 'My Page', guest_path(current_guest) %></li>
+            <li><%= link_to 'Log Out', destroy_guest_session_path, method: :delete %></li>
+            <% else %>
+            <li><%= link_to 'Home', root_path %></li>
+            <li><%= link_to 'sign up', new_guest_registration_path %></li>
+            <li><%= link_to 'login', new_guest_session_path %></li>
+            <% end %>
+        </ul>
     </nav>
 </nav>
